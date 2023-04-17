@@ -17,8 +17,9 @@ routes.delete("/:id",(req, res)=>{
     res.status(200).redirect("/")
 })
 
-routes.put("/:id",(req, res)=>{
-
+routes.post("/",(req, res)=>{
+    lista.push(req.body)
+    res.status(200).redirect("/")
 })
 
 module.exports = routes
