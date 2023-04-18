@@ -2,15 +2,27 @@ const express = require("express")
 
 const routes = express.Router()
 
-let lista = [{"id":1, "descricao":"Camiseta", "preço":20.99, "cores":["preto","branco","cinza"]}, {"id":2, "descricao":"Calça jeans", "preco":79.99, "cores":["preto, Branco, azul escuro"]}, {"id":3, "descricao":"Tênis esportivo", "preco":149.99, "cores":["preto, marrom"]}]
+var lista = [{"id": 1, "descricao":"Camiseta", "preço":20.99, "cores":["preto","branco","cinza"]},
+{"id": 2, "descricao":"Calça jeans", "preco":79.99, "cores":["preto, Branco, azul escuro"]},
+{"id": 3, "descricao":"Tênis esportivo", "preco":149.99, "cores":["preto, marrom"]},
+{"id": 4, "descricao": "Jaqueta de Couro", "preco": 99.99, "cores": ["preto", "marrom"]}
+]
 
 routes.getAll("/",(req, res)=>{
     res.status(200).json(lista)
 })
 
 routes.getById("/:id",(req, res)=>{
-    res.status(200).json(lista[req.params.id-1])
-})
+    // res.status(200).json(lista[req.params.id-1])
+    causa = lista.find(i => i.id == req.params.id)  
+    if(causa){
+      res.status(200).send(causa)
+
+    } else{
+      res.status(404).console.log("servidor fora de ar!!")
+    }
+  }
+)
 
 routes.delete("/:id",(req, res)=>{
     lista.splice(req.params.id-1,1)
